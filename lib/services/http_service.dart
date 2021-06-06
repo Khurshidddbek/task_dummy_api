@@ -35,7 +35,7 @@ class Network {
 
   static Future<String> POST(String api, Map<String, String> params) async {
     var uri = Uri.https(BASE, api);
-    var response = await put(uri, body: jsonEncode(params));
+    var response = await post(uri, body: jsonEncode(params));
     if(response.statusCode == 200) return response.body;
     return null;
   }

@@ -85,6 +85,8 @@ class _HomePageState extends State<HomePage> {
 
     Post post = Post(id : 1, name: 'test', salary: '123', age: '23');
 
+    Future.delayed(Duration(seconds: 100));
+
     _apiPostList();
     _apiPostGet();
     _apiPostCreate(post);
