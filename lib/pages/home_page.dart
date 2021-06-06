@@ -62,8 +62,19 @@ class _HomePageState extends State<HomePage> {
 
   void _apiPostCreate(Post post) {
     Network.POST(Network.API_CREATE, Network.paramsCreate(post)).then((response) => {
-      print(response),
       _showResponse_3(response),
+    });
+  }
+  
+  void _apiPostUpdate(Post post) {
+    Network.PUT(Network.API_UPDATE + '21', Network.paramsUpdate(post)).then((response) => {
+      _showResponse_4(response),
+    });
+  }
+
+  void _apiPostDelete() {
+    Network.DEL(Network.API_DELETE + '2', Network.paramsEmpty()).then((response) => {
+      _showResponse_5(response),
     });
   }
 
@@ -77,6 +88,9 @@ class _HomePageState extends State<HomePage> {
     _apiPostList();
     _apiPostGet();
     _apiPostCreate(post);
+    _apiPostUpdate(post);
+    _apiPostDelete();
+
   }
 
   @override
@@ -88,6 +102,8 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
+              Divider(height: 5, color: Colors.black,),
 
               // API_LIST
               Text('Method GET', style: TextStyle(fontWeight: FontWeight.bold),),
@@ -119,6 +135,30 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   children: [
                     Text(result_3 != null ? result_3 : 'No Data'),
+                  ],
+                ),
+              ),
+
+              Divider(height: 5, color: Colors.black,),
+
+              // API_UPDATE
+              Text('Method PUT', style: TextStyle(fontWeight: FontWeight.bold),),
+              Expanded(
+                child: ListView(
+                  children: [
+                    Text(result_4 != null ? result_4 : 'No Data'),
+                  ],
+                ),
+              ),
+
+              Divider(height: 5, color: Colors.black,),
+
+              // API_DELETE
+              Text('Method DEL', style: TextStyle(fontWeight: FontWeight.bold),),
+              Expanded(
+                child: ListView(
+                  children: [
+                    Text(result_5 != null ? result_5 : 'No Data'),
                   ],
                 ),
               ),

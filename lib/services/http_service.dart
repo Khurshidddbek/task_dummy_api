@@ -34,11 +34,23 @@ class Network {
   }
 
   static Future<String> POST(String api, Map<String, String> params) async {
-    print(params.toString());
     var uri = Uri.https(BASE, api);
     var response = await put(uri, body: jsonEncode(params));
     if(response.statusCode == 200) return response.body;
-    print(response.statusCode);
+    return null;
+  }
+
+  static Future<String> PUT(String api, Map<String, String> params) async {
+    var uri = Uri.https(BASE, api);
+    var response = await put(uri, body: jsonEncode(params));
+    if(response.statusCode == 200) return response.body;
+    return null;
+  }
+
+  static Future<String> DEL(String api, Map<String, String> params) async {
+    var uri = Uri.https(BASE, api, params);
+    var response = await delete(uri);
+    if(response.statusCode == 200) return response.body;
     return null;
   }
   //****************************************************************************
@@ -54,6 +66,17 @@ class Network {
   static Map<String, String> paramsCreate(Post post) {
     Map<String, String> params = Map();
     params.addAll({
+      'name' : post.name,
+      'salary' : post.salary,
+      'age' : post.age,
+    });
+    return params;
+  }
+
+  static Map<String, String> paramsUpdate(Post post) {
+    Map<String, String> params = Map();
+    params.addAll({
+      'id' : post.id.toString(),
       'name' : post.name,
       'salary' : post.salary,
       'age' : post.age,
